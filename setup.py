@@ -10,8 +10,9 @@ def read(filename):
     with open(path, encoding="utf-8") as file:
         return file.read()
 
+VERSION = (1, 1, 1)
+version = ".".join(map(str, VERSION))
 
-version = __import__("more_admin_filters").__version__
 if '-dev' in version:
     dev_status = 'Development Status :: 3 - Alpha'
 elif '-beta' in version:
