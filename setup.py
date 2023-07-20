@@ -2,7 +2,16 @@
 
 import os
 from setuptools import setup
-from setuptools import find_packages
+from setuptools import find_namespace_packages
+from pathlib import Path
+
+
+def version():
+    """Get the local package version."""
+    namespace = {}
+    path = Path("more_admin_filters", "__version__.py")
+    exec(path.read_text(), namespace)
+    return namespace["__version__"]
 
 
 def read(filename):
@@ -13,12 +22,13 @@ def read(filename):
 VERSION = (1, 1, 1)
 version = ".".join(map(str, VERSION))
 
-if '-dev' in version:
-    dev_status = 'Development Status :: 3 - Alpha'
-elif '-beta' in version:
-    dev_status = 'Development Status :: 4 - Beta'
+version = version()
+if "dev" in version:
+    dev_status = "Development Status :: 3 - Alpha"
+elif "beta" in version:
+    dev_status = "Development Status :: 4 - Beta"
 else:
-    dev_status = 'Development Status :: 5 - Production/Stable'
+    dev_status = "Development Status :: 5 - Production/Stable"
 
 
 setup(
@@ -28,24 +38,30 @@ setup(
     long_description=read("README.rst"),
     author="Thomas Leichtfuß",
     author_email="thomas.leichtfuss@posteo.de",
+    url="https://github.com/thomst/django-more-admin-filters",
     license="BSD License",
     platforms=["OS Independent"],
-    packages=find_packages(exclude=["tests"]),
+    packages=find_namespace_packages(exclude=["tests"]),
     include_package_data=True,
     install_requires=[
-        "Django>=1.11,<4.1",
+        "Django>=2.2,<5.0",
     ],
     classifiers=[
         dev_status,
         "Framework :: Django",
+        "Framework :: Django :: 2.2",
+        "Framework :: Django :: 3.0",
+        "Framework :: Django :: 3.1",
+        "Framework :: Django :: 3.2",
+        "Framework :: Django :: 4.0",
+        "Framework :: Django :: 4.1",
+        "Framework :: Django :: 4.2",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
