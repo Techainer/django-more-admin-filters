@@ -19,8 +19,6 @@ def read(filename):
     with open(path, encoding="utf-8") as file:
         return file.read()
 
-VERSION = (1, 1, 1)
-version = ".".join(map(str, VERSION))
 
 version = version()
 if "dev" in version:
